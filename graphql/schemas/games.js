@@ -6,25 +6,23 @@ const typeDefs = `#graphql
     
     type Game {
         _id: ID!
-        name: String!
+        title: String!
         description: String!
         price: Float!
         platform: [String!]!
         categories: [String!]!
         publisher: String!
         developer: String!
+        url: String!
         releaseDate: Date
         coverImage: URL
         Images: [URL]
-        ratings: [Rating]
     }
 
     extend type Query {
         games: [Game]
-        game(_id: $ID): Game
+        game(_id: ID): Game
     }
-
-    #Only publishers can mutate games 
 
     extend type Mutation {
         addGame(game: AddGameInput!): Game
@@ -34,7 +32,7 @@ const typeDefs = `#graphql
 
 
     input AddGameInput {
-        name: String!
+        title: String!
         description: String!
         price: Float!
         platform: [String!]!
@@ -47,7 +45,7 @@ const typeDefs = `#graphql
     }
 
     input EditGameInput {
-        name: String
+        title: String
         description: String
         price: Float
         platform: [String]

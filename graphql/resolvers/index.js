@@ -1,5 +1,5 @@
 import Query from './Query.js';
-import Mutation from './Mutations.js';
+import Mutation from './Mutations/index.js';
 
 export default {
     Query,
