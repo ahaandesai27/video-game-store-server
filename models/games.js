@@ -2,10 +2,13 @@ import mongoose, {Schema, model} from "mongoose"
 
 const urlGenerator = (title) => {
     //Grand Theft Auto V -> grand-theft-auto-v
-    return title
-        .toLowerCase()
-        .split(" ")
-        .join("-")
+    if (title) {
+        return title
+            .toLowerCase()
+            .split(" ")
+            .join("-")
+    }
+    return ""
 }
 
 const Games = new Schema({
@@ -23,7 +26,7 @@ const Games = new Schema({
 });
 
 Games.pre('save', function(next) {
-    if (this.isModified('title') || this.isNew) {
+    if ((this.isModified('title') || this.isNew) && !this.url) {
         this.url = urlGenerator(this.title)
     }
     next();

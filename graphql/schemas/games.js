@@ -20,8 +20,8 @@ const typeDefs = `#graphql
     }
 
     extend type Query {
-        games: [Game]
-        game(_id: ID): Game
+        games(offset: Int!, limit: Int!): [Game]
+        game(_id: ID!): Game
     }
 
     extend type Mutation {
@@ -39,6 +39,7 @@ const typeDefs = `#graphql
         categories: [String!]!
         publisher: String!
         developer: String!
+        url: String
         releaseDate: Date
         coverImage: URL
         Images: [URL]
@@ -51,6 +52,7 @@ const typeDefs = `#graphql
         platform: [String]
         categories: [String]
         publisher: String
+        url: String
         developer: String
         releaseDate: Date
         coverImage: URL

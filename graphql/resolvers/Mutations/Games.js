@@ -8,11 +8,13 @@ const urlGenerator = (title) => {
         .join("-")
 }
 
-const existingCheck = async (title) => {
-    const url = urlGenerator(title)
-    const existing = await Games.findOne({url: url})
-    if (existing) {
-        throw new Error("Game already exists");
+const existingCheck = async (title, url) => {
+    if (title) {
+        const url = urlGenerator(title)
+        const existing = await Games.findOne({url: url})
+        if (existing) {
+            throw new Error("Game already exists");
+        }
     }
 }
 

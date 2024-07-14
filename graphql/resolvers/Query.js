@@ -10,8 +10,8 @@ const Query = {
         return await Users.findById(_id);
     },
 
-    async games () {
-        return await Games.find();
+    async games (_, {limit, offset}) {
+        return await Games.find({}).skip(offset).limit(limit);
     },
 
     async game(_, {_id}) {
