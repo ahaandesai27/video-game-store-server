@@ -5,9 +5,11 @@ import express from 'express'
 import { expressMiddleware } from "@apollo/server/express4";
 import {mongoose} from 'mongoose'
 import cors from 'cors';
+import dotenv from 'dotenv';
 
+dotenv.config();
 const app = express();
-const connectionString = "mongodb+srv://eclipsesword777:HNcLrnsCMenbCxf6@cluster0.dvhrksp.mongodb.net/GameEcommerce?retryWrites=true&w=majority&appName=Cluster0"
+const connectionString = process.env.MONGO_URI;
 
 const startServer = async () => {
     try {
