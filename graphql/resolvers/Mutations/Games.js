@@ -8,7 +8,7 @@ const urlGenerator = (title) => {
         .join("-")
 }
 
-const existingCheck = async (title, url) => {
+const existingCheck = async (title) => {
     if (title) {
         const url = urlGenerator(title)
         const existing = await Games.findOne({url: url})

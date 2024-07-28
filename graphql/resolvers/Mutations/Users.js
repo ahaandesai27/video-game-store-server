@@ -1,7 +1,9 @@
+import dotenv from 'dotenv'
+dotenv.config();
 import Users from '../../../models/users.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-const secretKey = "553cec753a6f3e1e73d088ac9eaf0e6ca2bab6a4aff1f2618b3ae7a5d64055cf9bcfd56c9e37345371f159184145def9";
+const secretKey = process.env.JWT_SECRET
 //Later from ENV file
 
 const existingCheck = async (email, username) => {
