@@ -1,5 +1,7 @@
 import Users from '../../models/users.js';
 import Games from '../../models/games.js';
+import Reviews from '../../models/reviews.js';
+import Categories from '../../models/categories.js';
 
 const Query = {
     async users () {
@@ -28,13 +30,33 @@ const Query = {
         return await Games.findById(_id);
     },
 
+    async gameByUrl (_, {url}) {
+        return await Games.findOne({url: url});
+    },
+
     async gamesByPlatform(_, {platform, limit, offset}) {
         return await Games.find({platform: platform}).skip(offset).limit(limit);
     },
 
     async gamesByPrice(_, {price, limit, offset}) {
         return await Games.find({price: {$lte: price}}).skip(offset).limit(limit);
-    }
+    },
+
+    async reviewsByGame(_, {game}) {
+        //ID
+        return await Reviews.find({game: game});
+    },
+
+    async reviewsByUser(_, {user}) {
+        //ID
+        return await Reviews.find({user: user});
+    },
+
+    async categories () {
+        return await Categories.find();
+    },
+
+
 }
 
 export default Query;

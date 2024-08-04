@@ -10,13 +10,14 @@ const typeDefs = `#graphql
         description: String!
         price: Float!
         platform: [String!]!
-        categories: [String!]!
+        categories: [Category!]!
         publisher: String!
         developer: String!
         url: String!
         releaseDate: Date
         coverImage: URL
         Images: [URL]
+        reviews: [Review]
     }
 
     extend type Query {
@@ -24,6 +25,7 @@ const typeDefs = `#graphql
         game(_id: ID!): Game
         gamesByPlatform(platform: String!, offset: Int!, limit: Int!): [Game]
         gamesByPrice(price: Float!, offset: Int!, limit: Int!): [Game]
+        gameByUrl(url: String!): Game
     }
 
     extend type Mutation {
@@ -38,13 +40,14 @@ const typeDefs = `#graphql
         description: String!
         price: Float!
         platform: [String!]!
-        categories: [String!]!
+        categories: [ID!]!
         publisher: String!
         developer: String!
         url: String
         releaseDate: Date
         coverImage: URL
         Images: [URL]
+        
     }
 
     input EditGameInput {
@@ -52,13 +55,14 @@ const typeDefs = `#graphql
         description: String
         price: Float
         platform: [String]
-        categories: [String]
+        categories: [ID]
         publisher: String
         url: String
         developer: String
         releaseDate: Date
         coverImage: URL
         Images: [URL]
+        reviews: [ID]
     }
 `
 

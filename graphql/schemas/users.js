@@ -7,6 +7,8 @@
         firstName: String!
         lastName: String!
         age: Int!
+        reviews: [Review]
+        preferences: [Category]
     }
 
     type AuthPayLoad {
