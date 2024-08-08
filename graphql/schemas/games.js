@@ -25,6 +25,7 @@ const typeDefs = `#graphql
         game(_id: ID!): Game
         gamesByPlatform(platform: String!, offset: Int!, limit: Int!): [Game]
         gamesByPrice(price: Float!, offset: Int!, limit: Int!): [Game]
+        gamesByCategory(categories: [ID!]!, offset: Int!, limit: Int!): [Game]
         gameByUrl(url: String!): Game
     }
 

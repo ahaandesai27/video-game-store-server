@@ -42,6 +42,10 @@ const Query = {
         return await Games.find({price: {$lte: price}}).skip(offset).limit(limit);
     },
 
+    async gamesByCategory(_, {categories, limit, offset}) {
+        return await Games.find({categories: { $in : categories}}).skip(offset).limit(limit);
+    },
+
     async reviewsByGame(_, {game}) {
         //ID
         return await Reviews.find({game: game});
