@@ -9,7 +9,7 @@ const typeDefs = `#graphql
     }
 
     extend type Query {
-        reviewsByGame(game: ID!): [Review]
+        reviewsByGame(game: ID!, offset: Int!, limit: Int!): [Review]
         reviewsByUser(user: ID!): [Review]
     }
 
