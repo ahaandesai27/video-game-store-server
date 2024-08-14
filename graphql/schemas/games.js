@@ -21,12 +21,13 @@ const typeDefs = `#graphql
     }
 
     extend type Query {
-        games(offset: Int!, limit: Int!, platform: String, price: Float): [Game]
+        games(offset: Int!, limit: Int!, platform: String, price: Float, search: String): [Game]
         game(_id: ID!): Game
         gamesByPlatform(platform: String!, offset: Int!, limit: Int!): [Game]
         gamesByPrice(price: Float!, offset: Int!, limit: Int!): [Game]
         gamesByCategory(categories: [ID!]!, offset: Int!, limit: Int!): [Game]
         gameByUrl(url: String!): Game
+        searchGames(query: String, offset: Int!, limit: Int!): [Game]
     }
 
     extend type Mutation {

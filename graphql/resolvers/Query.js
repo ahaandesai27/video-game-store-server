@@ -4,6 +4,7 @@ import Reviews from '../../models/reviews.js';
 import Categories from '../../models/categories.js';
 
 const Query = {
+    //? User Queries
     async users () {
         return await Users.find();
     },
@@ -12,7 +13,8 @@ const Query = {
         return await Users.findById(_id);
     },
 
-    async games (_, {limit, offset, platform, price}) {
+    //? Game Queries
+    async games (_, {limit, offset, platform, price, search}) {
         const query = {}
         if (platform) {
             query.platform = platform;
@@ -22,6 +24,9 @@ const Query = {
         }
         else {
             query.price = {$gte: 0};
+        }
+        if (search) {
+            query.$text = {$search: search};
         }
         return await Games.find(query).skip(offset).limit(limit);
     },
@@ -46,6 +51,14 @@ const Query = {
         return await Games.find({categories: { $in : categories}}).skip(offset).limit(limit);
     },
 
+    async searchGames(_ , {query, limit, offset}) {
+        if (query == "") {
+            return await this.games(_, {limit, offset});
+        }
+        return await Games.find({$text: {$search: query}}).skip(offset).limit(limit);
+    },
+
+    //? Review Queries
     async reviewsByGame(_, {game, offset, limit}) {
         //ID
         return await Reviews.find({game: game}).skip(offset).limit(limit);
@@ -56,6 +69,7 @@ const Query = {
         return await Reviews.find({user: user});
     },
 
+    //? Categories Queries
     async categories () {
         return await Categories.find();
     },
