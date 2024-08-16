@@ -14,7 +14,7 @@ const Query = {
     },
 
     //? Game Queries
-    async games (_, {limit, offset, platform, price, search}) {
+    async games (_, {limit, offset, platform, price, search, category}) {
         const query = {}
         if (platform) {
             query.platform = platform;
@@ -27,6 +27,9 @@ const Query = {
         }
         if (search) {
             query.$text = {$search: search};
+        }
+        if (category) {
+            query.categories = { $in : category};
         }
         return await Games.find(query).skip(offset).limit(limit);
     },

@@ -21,7 +21,7 @@ const typeDefs = `#graphql
     }
 
     extend type Query {
-        games(offset: Int!, limit: Int!, platform: String, price: Float, search: String): [Game]
+        games(offset: Int!, limit: Int!, platform: String, price: Float, search: String, category: ID): [Game]
         game(_id: ID!): Game
         gamesByPlatform(platform: String!, offset: Int!, limit: Int!): [Game]
         gamesByPrice(price: Float!, offset: Int!, limit: Int!): [Game]
