@@ -52,6 +52,14 @@ const Mutations = {
     async deleteUser(_, {_id}) {
         return await Users.findByIdAndDelete(_id);
     },
+
+    async addGameToUser(_, {userID, gameID}) {
+        return await Users.findByIdAndUpdate(userID, {$push: {ownedGames: gameID}}, {new: true});
+    },
+
+    async addPreference(_, {userId, categoryId}) {
+        return await Users.findByIdAndUpdate(userId, {$push: {preferences: categoryId}}, {new: true});
+    }
 }
 
 export default Mutations;

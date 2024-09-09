@@ -9,6 +9,7 @@
         age: Int!
         reviews: [Review]
         preferences: [Category]
+        ownedGames: [Game]
     }
 
     type AuthPayLoad {
@@ -26,6 +27,8 @@
         registerUser(user: AddUserInput!): AuthPayLoad
         editUser(_id: ID!, user: EditUserInput!): User
         deleteUser(_id: ID!): User
+        addGameToUser(userID: ID!, gameID: ID!): User
+        addPreference(userID: ID!, categoryID: ID!): User
     }
 
     input AddUserInput {

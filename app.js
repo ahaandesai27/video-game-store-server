@@ -6,6 +6,7 @@ import { expressMiddleware } from "@apollo/server/express4";
 import {mongoose} from 'mongoose'
 import cors from 'cors';
 import dotenv from 'dotenv';
+import payments from './payments.js';
 
 dotenv.config();
 const app = express();
@@ -23,8 +24,9 @@ const startServer = async () => {
 
         await server.start();
         app.use(cors());
-
+        app.use(express.json());
         app.use('/api/graphql', express.json(), expressMiddleware(server))
+        app.use('/payments', payments);
 
         app.listen(4000, () => {
             console.log(`Server on port 4000, graphql at http://localhost:4000/api/graphql`)

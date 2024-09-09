@@ -40,7 +40,17 @@ const Users = new Schema({
     age: {
         type: Number,
         required: true,
-    }
+    },
+    ownedGames: {
+        type: [Schema.Types.ObjectId],
+        ref: 'Game',
+        default: [],
+    },
+    preferences: {
+        type: [Schema.Types.ObjectId],
+        ref: 'Category',
+        default: [],
+    },
 })
 
 export default model('Users', Users);
