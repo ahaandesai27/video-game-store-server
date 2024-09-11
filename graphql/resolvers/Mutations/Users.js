@@ -1,6 +1,7 @@
 import dotenv from 'dotenv'
 dotenv.config();
 import Users from '../../../models/users.js';
+import Games from '../../../models/games.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 const secretKey = process.env.JWT_SECRET
@@ -14,6 +15,17 @@ const existingCheck = async (email, username) => {
     }
     if (existingUsername) {
         throw new Error("Username already exists");
+    }
+}
+
+const updatePreferences= async (userId, gameId) => {
+    const game = await Games.findById(gameId);
+    const categories = game.categories;
+    const user = await Users.findById(userId);
+    for (let i = 0; i < categories.length; i++) {
+        if (!user.preferences.includes(categories[i])) {
+            await Users.findByIdAndUpdate(userId, {$push: {preferences: categories[i]}}, {new: true});
+        }
     }
 }
 
@@ -54,6 +66,7 @@ const Mutations = {
     },
 
     async addGameToUser(_, {userID, gameID}) {
+        await updatePreferences(userID, gameID);
         return await Users.findByIdAndUpdate(userID, {$push: {ownedGames: gameID}}, {new: true});
     },
 
