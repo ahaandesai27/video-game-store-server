@@ -14,7 +14,7 @@ const Query = {
     },
 
     //? Game Queries
-    async games (_, {limit, offset, platform, price, search, category}) {
+    async games (_, {limit, offset, newest = false, platform, price, search, category}) {
         const query = {}
         if (platform) {
             query.platform = platform;
@@ -31,7 +31,8 @@ const Query = {
         if (category) {
             query.categories = { $in : category};
         }
-        return await Games.find(query).skip(offset).limit(limit);
+        const sortOption = newest ? { releaseDate: -1 } : {};
+        return await Games.find(query).sort(sortOption).skip(offset).limit(limit);
     },
 
     async game(_, {_id}) {

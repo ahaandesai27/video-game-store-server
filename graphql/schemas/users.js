@@ -10,6 +10,7 @@
         reviews: [Review]
         preferences: [Category]
         ownedGames: [Game]
+        cart: [Game]
     }
 
     type AuthPayLoad {
@@ -28,6 +29,8 @@
         editUser(_id: ID!, user: EditUserInput!): User
         deleteUser(_id: ID!): User
         addGameToUser(userID: ID!, gameID: ID!): User
+        addGameToUserCart(userID: ID!, gameID: ID!): User
+        removeGameFromUserCart(userID: ID!, gameID: ID!): User
         addPreference(userID: ID!, categoryID: ID!): User
     }
 

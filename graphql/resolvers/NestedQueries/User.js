@@ -9,6 +9,12 @@ const User = {
         return await Games.find({
             _id: {$in: parent.ownedGames}
         })
+    },
+
+    async cart(parent) {
+        return await Games.find({
+            _id: {$in: parent.cart}
+        })
     }
 }
 

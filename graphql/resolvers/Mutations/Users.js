@@ -45,7 +45,7 @@ const Mutations = {
 
     async loginUser(_, {email, password}) {
         const user = await Users.findOne({email});
-        if (!Users) {
+        if (!user) {
             throw new Error('User not found');
         }
         const match = await bcrypt.compare(password, user.password);
@@ -68,6 +68,14 @@ const Mutations = {
     async addGameToUser(_, {userID, gameID}) {
         await updatePreferences(userID, gameID);
         return await Users.findByIdAndUpdate(userID, {$push: {ownedGames: gameID}}, {new: true});
+    },
+
+    async addGameToUserCart(_, {userID, gameID}) {
+        return await Users.findByIdAndUpdate(userID, {$push: {cart: gameID}}, {new: true});
+    },
+
+    async removeGameFromUserCart(_, {userID, gameID}) {
+        return await Users.findByIdAndUpdate(userID, {$pull: {cart: gameID}}, {new: true});
     },
 
     async addPreference(_, {userId, categoryId}) {

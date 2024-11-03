@@ -46,6 +46,11 @@ const Users = new Schema({
         ref: 'Game',
         default: [],
     },
+    cart: {
+        type: [Schema.Types.ObjectId],
+        ref: 'Game',
+        default: [],
+    },
     preferences: {
         type: [Schema.Types.ObjectId],
         ref: 'Category',
