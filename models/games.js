@@ -21,7 +21,7 @@ const Games = new Schema({
     releaseDate: { type: Date, default: Date.now },
     publisher: { type: String, required: true },
     developer: { type: String, required: true },
-    coverImage: { type: String},      //not making required for now
+    coverImage: { type: String, required: true},      
     Images: { type: [String] },
 });
 
