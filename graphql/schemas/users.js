@@ -9,8 +9,8 @@
         age: Int!
         reviews: [Review]
         preferences: [Category]
-        ownedGames: [Game]
-        cart: [Game]
+        ownedGames(offset: Int, limit: Int): [Game]
+        cart(offset: Int, limit: Int): [Game]
     }
 
     type AuthPayLoad {
