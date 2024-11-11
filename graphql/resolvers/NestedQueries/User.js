@@ -1,8 +1,7 @@
 //Nested queries after querying a user
 
-import mongoose from 'mongoose';
 import Games from '../../../models/games.js';
-import Users from '../../../models/users.js';
+import Categories from '../../../models/categories.js';
 
 const User = {
     async ownedGames(parent, { offset = 0, limit = 10 }) {
@@ -15,6 +14,12 @@ const User = {
         return await Games.find({
             _id: {$in: parent.cart}
         }).skip(offset).limit(limit)
+    },
+
+    async preferences(parent) {
+        return await Categories.find({
+            _id: {$in: parent.preferences}
+        })
     }
 }
 

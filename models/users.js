@@ -56,6 +56,13 @@ const Users = new Schema({
         ref: 'Category',
         default: [],
     },
+    about: {
+        type: String,
+        default: ''
+    },
+    pfp: {
+        type: String,
+    }
 })
 
 export default model('Users', Users);

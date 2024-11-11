@@ -6,11 +6,13 @@
         password: String!           #encrypted
         firstName: String!
         lastName: String!
+        createdAt: Date!
         age: Int!
         reviews: [Review]
         preferences: [Category]
         ownedGames(offset: Int, limit: Int): [Game]
         cart(offset: Int, limit: Int): [Game]
+        about: String
     }
 
     type AuthPayLoad {
