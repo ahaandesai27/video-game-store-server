@@ -80,6 +80,11 @@ const Mutations = {
 
     async addPreference(_, {userId, categoryId}) {
         return await Users.findByIdAndUpdate(userId, {$push: {preferences: categoryId}}, {new: true});
+    },
+
+    async addPreferences(_, {userId, categoryIds}) {
+        console.log(userId, categoryIds)
+        return await Users.findByIdAndUpdate(userId, {$push: {preferences: {$each: categoryIds}}}, {new: true});
     }
 }
 

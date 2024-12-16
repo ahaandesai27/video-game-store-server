@@ -34,6 +34,7 @@
         addGameToUserCart(userID: ID!, gameID: ID!): User
         removeGameFromUserCart(userID: ID!, gameID: ID!): User
         addPreference(userID: ID!, categoryID: ID!): User
+        addPreferences(userId: ID!, categoryIds: [ID]!): User
     }
 
     input AddUserInput {
