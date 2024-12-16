@@ -21,6 +21,7 @@ const startServer = async () => {
             typeDefs,
             resolvers
         });
+        const port = Number.parseInt(process.env.PORT) || 4000;
 
         await server.start();
         app.use(cors());
@@ -28,7 +29,7 @@ const startServer = async () => {
         app.use('/api/graphql', express.json(), expressMiddleware(server))
         app.use('/payments', payments);
 
-        app.listen(4000, () => {
+        app.listen(port, () => {
             console.log(`Server on port 4000, graphql at http://localhost:4000/api/graphql`)
         })
     }
