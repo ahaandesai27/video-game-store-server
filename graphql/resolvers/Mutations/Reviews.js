@@ -4,6 +4,9 @@ import Users from '../../../models/users.js';
 
 const Mutations = {
     async addReview(_, { review }) {
+        if (review.rating < 1 || review.rating > 5) {
+            throw new Error('Rating must be between 1 and 5');
+        }
         const newReview = await Reviews.create(review);
         const game = await Games.findByIdAndUpdate(review.game, { $push: { reviews: newReview._id } }, { new: true });
         const user = await Users.findByIdAndUpdate(review.user, { $push: { reviews: newReview._id } }, { new: true });
